@@ -1,0 +1,251 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #1a1a2e);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.shredder-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin: 30px 0;
+    perspective: 1000px;
+}
+
+.shredder-machine {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 180px;
+    background: #555;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.shredder-slot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 12px;
+    background: #333;
+    border-radius: 0 0 5px 5px;
+}
+
+.shredder-teeth {
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 230px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tooth {
+    width: 8px;
+    height: 20px;
+    background: #111;
+    border-radius: 0 0 3px 3px;
+}
+
+.card {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 140px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 0.5s ease;
+    z-index: 5;
+}
+
+.card.chip {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(135deg, #ffcc00, #ff9900);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.card-number {
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-align: left;
+}
+
+.card-holder {
+    font-size: 12px;
+    text-align: left;
+}
+
+.card.expired .card-content {
+    opacity: 0.5;
+}
+
+.stripes {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+.stripe {
+    height: 5px;
+    background: #333;
+    margin-bottom: 2px;
+}
+
+.card-beam {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 5px;
+    background: rgba(255, 0, 0, 0.7);
+    box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.7);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.controls {
+    margin-top: 30px;
+}
+
+button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.3);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.particles {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.particle {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 2px;
+    border-radius: 50%;
+}
+
+.card-destruction-area {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.shredded-piece {
+    position: absolute;
+    width: 20px;
+    height: 5px;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+    border-radius: 2px;
+    opacity: 0;
+}
+
+@keyframes shred {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(200px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+@keyframes beam {
+    0% {
+        opacity: 0;
+        height: 5px;
+    }
+    50% {
+        opacity: 1;
+        height: 10px;
+    }
+    100% {
+        opacity: 0;
+        height: 5px;
+    }
+}
